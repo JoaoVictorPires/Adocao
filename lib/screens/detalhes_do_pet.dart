@@ -1,3 +1,4 @@
+import 'package:adocaopet/themes.dart';
 import 'package:flutter/material.dart';
 import '../models/pet.dart';
 import 'formulario_adocao.dart'; 
@@ -45,6 +46,7 @@ class _DetalhesDoPetState extends State<DetalhesDoPet> with SingleTickerProvider
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.backgroundColor,
       appBar: AppBar(
         title: Text(widget.pet.nome),
         iconTheme: IconThemeData(color: Colors.white), 
@@ -99,7 +101,7 @@ class _DetalhesDoPetState extends State<DetalhesDoPet> with SingleTickerProvider
                   
                 },
                 style: ElevatedButton.styleFrom(
-                backgroundColor: const Color.fromARGB(255, 4, 221, 131),
+                backgroundColor: AppColors.buttonColor,
               ),
                 child: const Text('Adotar',style: TextStyle(color: Colors.black),),
 

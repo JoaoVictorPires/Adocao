@@ -1,3 +1,4 @@
+import 'package:adocaopet/themes.dart';
 import 'package:flutter/material.dart';
 import '../models/pet.dart';
 
@@ -8,6 +9,7 @@ class FormularioAdocao extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.backgroundColor,
       appBar: AppBar(
         centerTitle: true,
         title: const Text('Formulário de Adoção'),

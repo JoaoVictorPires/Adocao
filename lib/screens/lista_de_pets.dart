@@ -1,3 +1,4 @@
+import 'package:adocaopet/themes.dart';
 import 'package:flutter/material.dart';
 import 'detalhes_do_pet.dart';
 import '../models/pet.dart';
@@ -9,20 +10,28 @@ class ListaDePets extends StatelessWidget {
     Pet(nome: 'Rex', idade: '2 anos', imagem: 'assets/images/triste-cachorro.jpg'),
     Pet(nome: 'Luna', idade: '1 ano', imagem: 'assets/images/triste-cachorro.jpg'),
     Pet(nome: 'Camunzika', idade: '12 anos', imagem: 'assets/images/camunizk.jpg'),
+    Pet(nome: 'Bolinha', idade: '3 anos', imagem: 'assets/images/camunizk.jpg'),
+    Pet(nome: 'Pretinha', idade: '5 anos', imagem: 'assets/images/camunizk.jpg'),
+    Pet(nome: 'Rex', idade: '2 anos', imagem: 'assets/images/triste-cachorro.jpg'),
+    Pet(nome: 'Luna', idade: '1 ano', imagem: 'assets/images/triste-cachorro.jpg'),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.backgroundColor,
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('Cães para Adoção'),
+        title: const Text('Pets para Adoção'),
+        titleTextStyle: TextStyle(color: AppColors.title),
       ),
       body: ListView.builder(
+        
         itemCount: pets.length,
         itemBuilder: (context, index) {
           return Card(
             margin: const EdgeInsets.all(10),
+            elevation: 5,
             child: ListTile(
               contentPadding: const EdgeInsets.all(10),
               leading: Row(
