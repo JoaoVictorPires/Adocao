@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'screens/lista_de_pets.dart';
 import 'screens/login.dart';
 import 'themes.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(); // Inicializa o Firebase
   runApp(const MeuApp());
 }
 
@@ -14,18 +17,18 @@ class MeuApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        FocusScope.of(context).unfocus();
+        FocusScope.of(context).unfocus(); // Fecha o teclado ao clicar fora
       },
       child: MaterialApp(
         title: 'Adoção de Pets',
         theme: ThemeData(
           primaryColor: AppColors.primaryColor,
-          colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primaryColor), // Usando colorScheme para trabalhar com as cores
+          colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primaryColor),
           scaffoldBackgroundColor: AppColors.scaffoldBackgroundColor,
           textTheme: TextTheme(
             bodyLarge: TextStyle(color: AppColors.primaryTextColor),
             bodyMedium: TextStyle(color: AppColors.secondaryTextColor),
-            titleLarge: TextStyle(color: AppColors.appBarTextColor), // Correção para headline6
+            titleLarge: TextStyle(color: AppColors.appBarTextColor),
           ),
           appBarTheme: AppBarTheme(
             backgroundColor: AppColors.appBarColor,
