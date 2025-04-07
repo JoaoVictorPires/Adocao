@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="gcm_defaultSenderId" translatable="false">752144910838</string>
-    <string name="google_api_key" translatable="false">AIzaSyCCu-DjNT7luQLPY_1ELSkVxad7BT_qNg8</string>
-    <string name="google_app_id" translatable="false">1:752144910838:android:b32a5dbc5641822df55fd7</string>
-    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyCCu-DjNT7luQLPY_1ELSkVxad7BT_qNg8</string>
-    <string name="google_storage_bucket" translatable="false">aadocaopets.firebasestorage.app</string>
-    <string name="project_id" translatable="false">aadocaopets</string>
-</resources>
