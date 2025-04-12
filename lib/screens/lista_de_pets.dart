@@ -25,16 +25,22 @@ class ListaDePets extends StatelessWidget {
         title: const Text('Pets para Adoção'),
         titleTextStyle: TextStyle(color: Colors.white),
         actions: [
+          // Botão de perfil no canto superior direito
           IconButton(
-            icon: const Icon(Icons.logout),
+            icon: const Icon(Icons.account_circle), // Ícone de perfil
             onPressed: () {
-              Navigator.pushReplacementNamed(context, '/login');
+              Navigator.pushNamed(context, '/perfil'); // Navega para a tela de perfil
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.logout), // Ícone de logout
+            onPressed: () {
+              Navigator.pushReplacementNamed(context, '/login'); // Navega para o login
             },
           ),
         ],
       ),
       body: ListView.builder(
-        
         itemCount: pets.length,
         itemBuilder: (context, index) {
           return Card(
@@ -48,8 +54,8 @@ class ListaDePets extends StatelessWidget {
                   ClipOval(
                     child: Image.asset(
                       pets[index].imagem,
-                      width: 60, 
-                      height: 60, 
+                      width: 60,
+                      height: 60,
                       fit: BoxFit.cover,
                     ),
                   ),
