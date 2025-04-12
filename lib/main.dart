@@ -1,3 +1,4 @@
+import 'package:adocaopet/screens/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart'; // <- Importante!
@@ -6,6 +7,7 @@ import 'screens/login.dart';
 import 'screens/register.dart';
 import 'screens/perfil.dart';
 import 'themes.dart';
+
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -51,12 +53,13 @@ class MeuApp extends StatelessWidget {
           child: MaterialApp(
             title: 'Adoção de Pets',
             theme: _buildThemeData(),
-            initialRoute: '/login',
+            initialRoute: '/login', // Rota inicial para a tela de Login
             routes: {
               '/login': (context) => const LoginScreen(),
               '/register': (context) => RegisterScreen(),
+              '/splash': (context) => const SplashScreen(), // A SplashScreen
               '/listaDePets': (context) => const ListaDePets(),
-              '/perfil': (context) => PerfilScreen(), 
+              '/perfil': (context) => PerfilScreen(),
             },
           ),
         );
