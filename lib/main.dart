@@ -1,11 +1,10 @@
-
-import 'package:adocaopet/screens/perfil.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart'; // <- Importante!
 import 'screens/lista_de_pets.dart';
 import 'screens/login.dart';
 import 'screens/register.dart';
+import 'screens/perfil.dart';
 import 'themes.dart';
 
 void main() {
@@ -55,9 +54,9 @@ class MeuApp extends StatelessWidget {
             initialRoute: '/login',
             routes: {
               '/login': (context) => const LoginScreen(),
-              '/register': (context) => RegisterScreen(), 
+              '/register': (context) => RegisterScreen(),
               '/listaDePets': (context) => const ListaDePets(),
-              '/perfil': (context) => const PerfilScreen(),
+              '/perfil': (context) => PerfilScreen(), 
             },
           ),
         );
