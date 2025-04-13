@@ -14,11 +14,9 @@ class _AlterarSenhaScreenState extends State<AlterarSenhaScreen> {
   final _confirmarSenhaController = TextEditingController();
   final _auth = FirebaseAuth.instance;
 
-  // Função para alterar a senha
   void _alterarSenha() async {
     final user = _auth.currentUser;
 
-    // Verificando se o usuário está logado
     if (user == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Usuário não autenticado!')),
@@ -27,16 +25,12 @@ class _AlterarSenhaScreenState extends State<AlterarSenhaScreen> {
     }
 
     try {
-      // Verificando se a senha atual está correta
       final credential = EmailAuthProvider.credential(
         email: user.email!,
         password: _senhaAtualController.text.trim(),
       );
-
-      // Reautenticando o usuário para verificar a senha atual
       await user.reauthenticateWithCredential(credential);
 
-      // Verificando se as novas senhas são iguais
       if (_novaSenhaController.text.trim() != _confirmarSenhaController.text.trim()) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('As senhas não coincidem!')),
@@ -44,15 +38,13 @@ class _AlterarSenhaScreenState extends State<AlterarSenhaScreen> {
         return;
       }
 
-      // Atualizando a senha
       await user.updatePassword(_novaSenhaController.text.trim());
 
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Senha alterada com sucesso!')),
       );
 
-      // Redireciona para a tela de perfil ou home após alteração
-      Navigator.pop(context); // Volta para a tela anterior (perfil)
+      Navigator.pop(context);
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Erro ao alterar senha: $e')),

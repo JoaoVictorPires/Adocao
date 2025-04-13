@@ -25,17 +25,16 @@ class ListaDePets extends StatelessWidget {
         title: const Text('Pets para Adoção'),
         titleTextStyle: TextStyle(color: Colors.white),
         actions: [
-          // Botão de perfil no canto superior direito
           IconButton(
-            icon: const Icon(Icons.account_circle), // Ícone de perfil
+            icon: const Icon(Icons.account_circle),
             onPressed: () {
-              Navigator.pushNamed(context, '/perfil'); // Navega para a tela de perfil
+              Navigator.pushNamed(context, '/perfil');
             },
           ),
           IconButton(
-            icon: const Icon(Icons.logout), // Ícone de logout
+            icon: const Icon(Icons.logout), 
             onPressed: () {
-              Navigator.pushReplacementNamed(context, '/login'); // Navega para o login
+              Navigator.pushReplacementNamed(context, '/login'); 
             },
           ),
         ],

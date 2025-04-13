@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'alterarsenha.dart'; // Importe a tela de alterar senha
+import 'alterarsenha.dart'; 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart'; // Import para Firestore
+import 'package:cloud_firestore/cloud_firestore.dart'; 
 
 class PerfilScreen extends StatelessWidget {
   const PerfilScreen({super.key});
@@ -15,7 +15,7 @@ class PerfilScreen extends StatelessWidget {
         future: FirebaseFirestore.instance.collection('usuarios').doc(user?.uid).get(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator()); // Carregando dados
+            return const Center(child: CircularProgressIndicator()); 
           }
 
           if (snapshot.hasError) {
@@ -50,7 +50,7 @@ class PerfilScreen extends StatelessWidget {
                       child: IconButton(
                         icon: const Icon(Icons.arrow_back, size: 28, color: Colors.deepPurple),
                         onPressed: () {
-                          Navigator.pop(context); // Voltar para a tela anterior
+                          Navigator.pop(context);
                         },
                       ),
                     ),

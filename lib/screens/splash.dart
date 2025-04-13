@@ -12,8 +12,8 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   String? animalPreferido;
-  bool _isVisible = false; // Controla a visibilidade do ícone para o fade
-  bool _navigating = false; // Controla o estado da navegação
+  bool _isVisible = false; 
+  bool _navigating = false;
 
   @override
   void initState() {
@@ -21,7 +21,6 @@ class _SplashScreenState extends State<SplashScreen> {
     _verificarPreferencia();
   }
 
-  // Função para verificar a preferência do usuário no Firebase
   Future<void> _verificarPreferencia() async {
     User? usuario = FirebaseAuth.instance.currentUser;
 
@@ -42,32 +41,28 @@ class _SplashScreenState extends State<SplashScreen> {
       }
     }
 
-    // Atraso para exibir rapidamente a pata e em seguida preparar a navegação
-    await Future.delayed(const Duration(milliseconds: 500)); // Menos tempo para aparecer a pata
+    await Future.delayed(const Duration(milliseconds: 500));
 
     setState(() {
-      _isVisible = true; // Exibe o ícone rapidamente
+      _isVisible = true; 
     });
 
-    // Atraso para dar tempo do efeito de fade e depois navegar para a próxima tela
     await Future.delayed(const Duration(seconds: 1));
 
-    // Inicia o fade e navega para a próxima tela
     _navegarParaListaDePets();
   }
 
-  // Função para navegar para a tela de ListaDePets com fade
   void _navegarParaListaDePets() {
     if (!_navigating) {
       setState(() {
-        _navigating = true; // Previne múltiplas navegações
+        _navigating = true;
       });
       Navigator.pushReplacement(
         context,
         PageRouteBuilder(
           pageBuilder: (context, animation, secondaryAnimation) {
             return FadeTransition(
-              opacity: animation, // Aplicando o fade na transição para a nova tela
+              opacity: animation,
               child: const ListaDePets(),
             );
           },
@@ -82,10 +77,10 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       body: Center(
         child: animalPreferido == null
-            ? const CircularProgressIndicator() // Exibe um loading enquanto a preferência não é carregada
+            ? const CircularProgressIndicator()
             : AnimatedOpacity(
                 opacity: _isVisible ? 1.0 : 0.0,
-                duration: const Duration(milliseconds: 500), // Mais rápido, 500ms para aparecer o ícone
+                duration: const Duration(milliseconds: 500),
                 child: Icon(
                   animalPreferido == 'cachorro' ? Icons.pets : Icons.pets_outlined,
                   size: 100,

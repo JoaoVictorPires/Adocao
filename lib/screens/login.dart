@@ -20,7 +20,6 @@ class _LoginScreenState extends State<LoginScreen> {
         email: _emailController.text.trim(),
         password: _senhaController.text,
       );
-      // Após o login, vai para a SplashScreen
       Navigator.pushReplacementNamed(context, '/splash');
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
