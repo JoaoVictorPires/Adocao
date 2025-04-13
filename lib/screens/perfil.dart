@@ -103,8 +103,8 @@ class PerfilScreen extends StatelessWidget {
                                 ),
                                 const SizedBox(height: 16),
                                 ElevatedButton.icon(
-                                  icon: const Icon(Icons.delete),
-                                  label: const Text('Deletar Conta'),
+                                  icon: const Icon(Icons.delete, color: Colors.white),
+                                  label: const Text('Deletar Conta', style: TextStyle(color: Colors.white)),
                                   onPressed: () async {
                                     bool? confirmDelete = await showDialog(
                                       context: context,

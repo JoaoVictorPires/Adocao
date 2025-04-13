@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart'; // <-- Import Firestore aqui
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -10,36 +10,33 @@ class RegisterScreen extends StatefulWidget {
 class _RegisterScreenState extends State<RegisterScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  final _nameController = TextEditingController(); // Controller para o nome
+  final _nameController = TextEditingController();
   final _auth = FirebaseAuth.instance;
 
-  // Variáveis para armazenar a escolha do usuário
   bool _lovesDog = false;
   bool _lovesCat = false;
 
   void _register() async {
     try {
-      // Cadastra o usuário com email e senha
       UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
         email: _emailController.text.trim(),
         password: _passwordController.text.trim(),
       );
 
-      // Pegando o UID do usuário criado
       String uid = userCredential.user!.uid;
 
-      // Salvando dados no Firestore
       await FirebaseFirestore.instance.collection('usuarios').doc(uid).set({
         'email': _emailController.text.trim(),
-        'nome': _nameController.text.trim(),  // Salvando nome
-        'gostaDeCachorro': _lovesDog,  // Salvando se ama cachorro
-        'gostaDeGato': _lovesCat,  // Salvando se ama gato
+        'nome': _nameController.text.trim(),
+        'gostaDeCachorro': _lovesDog,
+        'gostaDeGato': _lovesCat,
         'criadoEm': Timestamp.now(),
       });
 
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Cadastro realizado com sucesso!')),
+        const SnackBar(content: Text('Cadastro realizado com sucesso!')),
       );
+      Navigator.pop(context);
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Erro ao cadastrar: $e')),
@@ -50,34 +47,45 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFF3E5F5),
       appBar: AppBar(
-        title: Text('Cadastro'),
+        title: const Text('Cadastro'),
+        backgroundColor: Colors.deepPurple,
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(24.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // Campo para nome
+            const SizedBox(height: 32),
+            const Icon(Icons.pets, size: 60, color: Colors.deepPurple),
+            const SizedBox(height: 16),
+            const Text(
+              'Crie sua conta',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 32),
+
             TextField(
               controller: _nameController,
-              decoration: InputDecoration(labelText: 'Nome'),
+              decoration: const InputDecoration(labelText: 'Nome'),
             ),
-            // Campo para e-mail
+            const SizedBox(height: 12),
+
             TextField(
               controller: _emailController,
-              decoration: InputDecoration(labelText: 'E-mail'),
+              decoration: const InputDecoration(labelText: 'E-mail'),
               keyboardType: TextInputType.emailAddress,
             ),
-            // Campo para senha
+            const SizedBox(height: 12),
+
             TextField(
               controller: _passwordController,
-              decoration: InputDecoration(labelText: 'Senha'),
+              decoration: const InputDecoration(labelText: 'Senha'),
               obscureText: true,
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
 
-            // Checkbox para escolher cachorro ou gato
             Row(
               children: [
                 Checkbox(
@@ -85,33 +93,39 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   onChanged: (value) {
                     setState(() {
                       _lovesDog = value!;
-                      // Se escolher cachorro, desmarcar gato
                       if (_lovesDog) _lovesCat = false;
                     });
                   },
                 ),
-                Text("Amo Cachorro"),
-                SizedBox(width: 20),
+                const Text("Amo Cachorro 🐶"),
+                const SizedBox(width: 16),
                 Checkbox(
                   value: _lovesCat,
                   onChanged: (value) {
                     setState(() {
                       _lovesCat = value!;
-                      // Se escolher gato, desmarcar cachorro
                       if (_lovesCat) _lovesDog = false;
                     });
                   },
                 ),
-                Text("Amo Gato"),
+                const Text("Amo Gato 🐱"),
               ],
             ),
 
-            SizedBox(height: 20),
+            const SizedBox(height: 32),
 
-            // Botão de cadastro
-            ElevatedButton(
+            ElevatedButton.icon(
               onPressed: _register,
-              child: Text('Cadastrar'),
+              icon: const Icon(Icons.person_add, color: Colors.white),
+              label: const Text('Cadastrar'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.deepPurple,
+                foregroundColor: Colors.white,
+                minimumSize: const Size(double.infinity, 48),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
             ),
           ],
         ),
@@ -123,7 +137,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
-    _nameController.dispose();  // Liberando o controller do nome
+    _nameController.dispose();
     super.dispose();
   }
 }
